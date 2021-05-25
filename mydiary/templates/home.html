@@ -1,6 +1,14 @@
 <h1>BABY LION DIARY</h1>
-
-<a href="{%url 'new' %}">일기 작성하기</a>
+{% if user.is_authenticated %}
+<!--유저가 로그인된 상태라면-->
+    {{ user.username }}님 환영합니다!<br><br>{{user.major }} 과 {{ user.MBTI }} 유형이신 {{ user.nickname }}님 환영합니다!<br><br>
+    <a href="{% url 'logout' %}">로그아웃하기</a><br><br>
+{% else %}
+    <a href="{% url 'login' %}">로그인하기</a><br><br>
+    <a href="{% url 'signup' %}">회원가입하기</a><br><br>
+{% endif %}
+<!--템플릿으로 이프 써주면 닫는 이프도 있어야 한다-->
+<a href="{% url 'new' %}">일기 작성하기</a>
 <br><br>
 
 {% for post in posts_list %}
